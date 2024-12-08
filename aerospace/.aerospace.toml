@@ -7,14 +7,23 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
+
+# other good colors
+# purple      - 0xff9933ff 
+# darker blue - 0xff3399ff
+
 after-startup-command = [
-    'exec-and-forget borders active_color=0xff76b5c5 inactive_color=0xff width=10.0'
+    'exec-and-forget borders active_color=0xff76b5c5 inactive_color=0xff width=5.0'
 ]
+
 # Start AeroSpace at login
 start-at-login = true
+
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
+
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
+
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
 # The 'accordion-padding' specifies the size of accordion padding
 # You can set 0 to disable the padding feature
@@ -47,12 +56,13 @@ preset = 'qwerty'
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 40
-inner.vertical =   40
-outer.left =       40
-outer.bottom =     40
-outer.top =        40
-outer.right =      40
+inner.horizontal = [{monitor."LC32G7xT" = 40}, 25]
+inner.vertical =   [{monitor."LC32G7xT" = 40}, 20]
+outer.left =       [{monitor."LC32G7xT" = 40}, 25]
+outer.bottom =     [{monitor."LC32G7xT" = 40}, 25]
+outer.top =        [{monitor."LC32G7xT" = 40}, 25]
+outer.right =      [{monitor."LC32G7xT" = 40}, 25]
+
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # 'main' binding mode must be always presented
@@ -71,6 +81,7 @@ outer.right =      40
 # All possible modifiers: cmd, alt, ctrl, shift
 # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
+
 alt-u = '''
 exec-and-forget osascript -e '
 tell application "Arc"
@@ -81,24 +92,71 @@ tell application "Arc"
     end if
 end tell'
 '''
+
+alt-i = '''
+exec-and-forget osascript -e '
+tell application "Code"
+    if it is running then
+        do shell script "~/aerospace-scripts/open-or-focus-window.sh Code"
+    else
+        do shell script "open -a Code"
+    end if
+end tell'
+'''
+
+alt-o = '''
+exec-and-forget osascript -e '
+tell application "Warp"
+    if it is running then
+        do shell script "~/aerospace-scripts/open-or-focus-window.sh Warp"
+    else
+        do shell script "open -a Warp"
+    end if
+end tell'
+'''
+
+alt-p = '''
+exec-and-forget osascript -e '
+tell application "Obsidian"
+    if it is running then
+        do shell script "~/aerospace-scripts/open-or-focus-window.sh Obsidian"
+    else
+        do shell script "open -a Obsidian"
+    end if
+end tell'
+'''
+
+# Fullscreen
+alt-f = 'fullscreen'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 alt-h = 'focus left'
 alt-j = 'focus down'
 alt-k = 'focus up'
 alt-l = 'focus right'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-shift-h = 'move left'
 alt-shift-j = 'move down'
 alt-shift-k = 'move up'
 alt-shift-l = 'move right'
+
+# Joins with arrow keys
+# alt-shift-left = 'join-with left'
+# alt-shift-down = 'join-with down'
+# alt-shift-up = 'join-with up'
+# alt-shift-right = 'join-with right'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 alt-shift-minus = 'resize smart -50'
 alt-shift-equal = 'resize smart +50'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-# No longer used spaces: uiop
+# No longer used spaces: u, i, o, p, f
 alt-1 = 'workspace 1'
 alt-2 = 'workspace 2'
 alt-3 = 'workspace 3'
@@ -113,7 +171,6 @@ alt-b = 'workspace B'
 alt-c = 'workspace C'
 alt-d = 'workspace D'
 alt-e = 'workspace E'
-alt-f = 'workspace F'
 alt-g = 'workspace G'
 alt-m = 'workspace M'
 alt-n = 'workspace N'
@@ -126,6 +183,7 @@ alt-w = 'workspace W'
 alt-x = 'workspace X'
 alt-y = 'workspace Y'
 alt-z = 'workspace Z'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
@@ -158,19 +216,25 @@ alt-shift-w = 'move-node-to-workspace W'
 alt-shift-x = 'move-node-to-workspace X'
 alt-shift-y = 'move-node-to-workspace Y'
 alt-shift-z = 'move-node-to-workspace Z'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
 alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 alt-shift-semicolon = 'mode service'
+
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
+
 esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
 f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
+
 # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
 #s = ['layout sticky tiling', 'mode main']
 alt-shift-h = ['join-with left', 'mode main']
@@ -180,9 +244,28 @@ alt-shift-l = ['join-with right', 'mode main']
 down = 'volume down'
 up = 'volume up'
 shift-down = ['volume set 0', 'mode main']
+
 [[on-window-detected]]
 if.app-name-regex-substring = "Spotify"
 run = ["move-node-to-workspace 4"]
+
+[[on-window-detected]]
+if.app-name-regex-substring = "Discord"
+run = ["move-node-to-workspace 3"]
+
+[[on-window-detected]]
+if.app-name-regex-substring = "Messages"
+run = ["move-node-to-workspace 3"]
+
 [[on-window-detected]]
 if.app-name-regex-substring = 'Finder'
+run = ["layout floating"]
+
+[[on-window-detected]]
+if.app-name-regex-substring = '1Password'
+run = ["layout floating"]
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'DrRacket'
+if.window-title-regex-substring = 'Test Results'
 run = ["layout floating"]
